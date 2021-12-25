@@ -18,7 +18,7 @@ class SpeedsterCreate(SpeedsterBase):
     password: str
 
 
-class SpeedsterInDb(SpeedsterBase):
+class Speedster(SpeedsterBase):
     id: UUID
 
     class Config:

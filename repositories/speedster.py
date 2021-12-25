@@ -10,13 +10,17 @@ from app.dependenies import get_db
 from schemes.speedster import SpeedsterCreate
 
 
-class SpeddsterRepository:
+class SpeedsterRepository:
     def __init__(self, db: Session = Depends(get_db)):
         self.db = db
 
     def find(self, uuid: UUID) -> Speedster:
         query = self.db.query(Speedster)
         return query.filter(Speedster.id == uuid).first()
+
+    def all(self) -> List[Speedster]:
+        query = self.db.query(Speedster)
+        return query.all()
 
     def create(self, speedster: SpeedsterCreate) -> Speedster:
         faked_pass_hash = speedster.password+'_some_fake_hash'

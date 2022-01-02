@@ -1,4 +1,3 @@
-from os import name
 from typing import List
 from uuid import UUID, uuid4
 from sqlalchemy.orm import Session
@@ -6,7 +5,7 @@ from sqlalchemy.orm import Session
 from fastapi import Depends
 
 from models.speedster import Speedster
-from app.dependenies import get_db
+from app.dependencies import get_db
 from schemes.speedster import SpeedsterCreate
 
 
@@ -18,13 +17,15 @@ class SpeedsterRepository:
         query = self.db.query(Speedster)
         return query.filter(Speedster.id == uuid).first()
 
+    def find_by_email(self, email: str) -> Speedster:
+        query = self.db.query(Speedster)
+        return query.filter(Speedster.email == email).first()
+
     def all(self) -> List[Speedster]:
         query = self.db.query(Speedster)
         return query.all()
 
     def create(self, speedster: SpeedsterCreate) -> Speedster:
-        faked_pass_hash = speedster.password+'_some_fake_hash'
-
         db_speedster = Speedster(**speedster.dict())
 
         self.db.add(db_speedster)

@@ -1,5 +1,4 @@
 from functools import lru_cache
-from typing import cast
 from . import config
 from . import databases
 from sqlalchemy.orm import Session
@@ -15,4 +14,11 @@ def get_db() -> Session:
 
 @lru_cache
 def get_db_settings() -> config.DBSettings:
-    return config.DBSettings()
+    settings = config.DBSettings()
+
+    return settings
+
+
+@lru_cache
+def get_token_settings() -> config.TokenSettings:
+    return config.TokenSettings()

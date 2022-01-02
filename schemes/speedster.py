@@ -1,6 +1,5 @@
 from typing import Literal
 from uuid import UUID
-import uuid
 
 from pydantic import BaseModel, EmailStr
 
